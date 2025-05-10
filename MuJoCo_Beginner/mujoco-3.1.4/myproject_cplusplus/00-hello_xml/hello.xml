@@ -1,0 +1,25 @@
+<mujoco>
+    <compiler angle="radian" />
+    <visual>
+        <headlight ambient="0.5 0.5 0.5" />
+    </visual>
+
+    <asset>
+        <material name="green" rgba="0 1 0 1" />
+    </asset>
+    <option gravity="0 0 -1" />
+    <worldbody>
+        <light diffuse=".5 .5 .5" pos="0 0 3" dir="0 0 -1"/>
+        <geom type="plane" size="1 1 0.1" rgba="1 0 0 1"/>
+        <body pos="0 0 1" euler="0 0 0">
+            <joint type="free"/>
+            <inertial mass="1" pos="0 0 0" diaginertia="0.01 0.01 0.01" />
+            <geom type="box" size=".1 .2 .3" material="green" />
+        </body>
+        <body pos="0 0 2" euler="0 0 0">
+            <joint type="free"/>
+            <inertial mass="1" pos="0 0 0" diaginertia="0.01 0.01 0.01" />
+            <geom type="box" size=".1 .2 .3" material="green" />
+        </body>
+    </worldbody>
+</mujoco>

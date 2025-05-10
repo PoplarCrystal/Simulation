@@ -1,0 +1,49 @@
+<mujoco>
+    <asset>
+        <material name="green" rgba="0 1 0 1" />
+        <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4" />
+        <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".2" />
+    </asset>
+
+    <worldbody>
+        <light diffuse="0.3 0.3 0.3" pos="1 0 3" dir="-1 0 -3" />
+        <geom type="plane" size="10 10 0.1"  material="grid" />
+
+
+        <body name="H" pos="0 0 1" euler="0 0 0">
+            <joint type="free"/>
+            <geom type="capsule" size=".05 .4" pos="0.0 0 0" euler="0 0 0" material="green" />
+            <geom type="capsule" size=".05 .2" pos="0.2 0 0" euler="0 90 0" material="green" />
+            <geom type="capsule" size=".05 .4" pos="0.4 0 0" euler="0 0 0" material="green" />
+        </body>
+
+        <body name="E" pos="0.6 0 1" euler="0 0 0">
+            <joint type="free"/>
+            <geom type="capsule" size=".05 .4" pos="0 0 0" euler="0 0 0" material="green" />
+            <geom type="capsule" size=".05 .2" pos="0.2 0 0.4" euler="0 90 0" material="green" />
+            <geom type="capsule" size=".05 .2" pos="0.2 0 0" euler="0 90 0" material="green" />
+            <geom type="capsule" size=".05 .2" pos="0.2 0 -0.4" euler="0 90 0" material="green" />
+        </body>
+
+        <body name="L1" pos="1.2 0 1" euler="0 0 0">
+            <joint type="free"/>
+            <geom type="capsule" size=".05 .4" pos="0 0 0" euler="0 0 0" material="green" />
+            <geom type="capsule" size=".05 .2" pos="0.2 0 -0.4" euler="0 90 0" material="green" />
+        </body>
+
+        <body name="L2" pos="1.8 0 1" euler="0 0 0">
+            <joint type="free"/>
+            <geom type="capsule" size=".05 .4" pos="0 0 0" euler="0 0 0" material="green" />
+            <geom type="capsule" size=".05 .2" pos="0.2 0 -0.4" euler="0 90 0" material="green" />
+        </body>
+
+        <body name="O" pos="2.4 0 1" euler="0 0 0">
+            <joint type="free"/>
+            <geom type="capsule" size=".05 .4" pos="0 0 0" euler="0 0 0" material="green" />
+            <geom type="capsule" size=".05 .2" pos="0.2 0 -0.4" euler="0 90 0" material="green" />
+            <geom type="capsule" size=".05 .2" pos="0.2 0 0.4" euler="0 90 0" material="green" />
+            <geom type="capsule" size=".05 .4" pos="0.4 0 0" euler="0 0 0" material="green" />
+        </body>
+
+    </worldbody>
+</mujoco>

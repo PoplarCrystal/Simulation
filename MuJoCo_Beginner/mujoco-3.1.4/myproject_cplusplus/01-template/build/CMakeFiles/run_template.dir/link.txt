@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/run_template.dir/main.c.o  -o run_template   -L/home/nara/Documents/mujoco_test/mujoco-3.1.1/myproject/01-template/../../lib  -Wl,-rpath,/home/nara/Documents/mujoco_test/mujoco-3.1.1/myproject/01-template/../../lib -lmujoco -lglfw 

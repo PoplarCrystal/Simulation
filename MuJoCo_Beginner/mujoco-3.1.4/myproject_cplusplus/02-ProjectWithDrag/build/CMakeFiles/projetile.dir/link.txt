@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/projetile.dir/main.cpp.o -o projetile   -L/home/nara/Documents/mujoco-test/mujoco-3.1.4/myproject_cplusplus/02-ProjectWithDrag/../../lib  -Wl,-rpath,/home/nara/Documents/mujoco-test/mujoco-3.1.4/myproject_cplusplus/02-ProjectWithDrag/../../lib -lmujoco -lglfw 

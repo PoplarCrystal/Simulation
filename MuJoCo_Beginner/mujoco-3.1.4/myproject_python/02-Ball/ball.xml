@@ -1,0 +1,18 @@
+<mujoco>
+    <asset>
+        <material name="green" rgba="0 1 0 1" />
+        <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4" />
+        <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".2" />
+    </asset>
+
+    <worldbody>
+        <light diffuse="0.3 0.3 0.3" pos="1 0 3" dir="-1 0 -3" />
+        <geom type="plane" size="10 10 0.1"  material="grid" />
+
+        <body pos="0 0 1">
+            <joint type="free"/>
+            <geom type="sphere" size=".1" material="green" />
+        </body>
+    </worldbody>
+
+</mujoco>

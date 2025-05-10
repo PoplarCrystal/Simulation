@@ -1,0 +1,38 @@
+<mujoco>
+    <option gravity="0 0 -9.81" />
+    <asset>
+        <material name="green" rgba="0 0.9 0 1" />
+        <material name="blue" rgba="0 0 0.9 1" />
+        <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4" />
+        <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".2" />
+    </asset>
+
+    <worldbody>
+        <light diffuse="0.3 0.3 0.3" pos="1 0 3" dir="-1 0 -3" />
+        <geom type="plane" size="10 10 0.1"  material="grid" />
+
+        <body pos="0 0 3.0" euler="0 0 0">
+            <joint name="joint1" type="hinge" axis="0 -1 0" pos="0 0 -0.5" />
+            <geom type="capsule" size="0.05 0.5" mass="1" material="green" />
+
+            <body pos="0 0.1 1" euler="0 0 0">
+                <joint name="joint2" type="hinge" axis="0 -1 0" pos="0 0 -0.5"  />
+                <geom type="capsule" size="0.05 0.5" mass="1" material="blue" />
+            </body>
+
+        </body>
+    </worldbody>
+
+<!--    <actuator>-->
+<!--        <motor name="trq_ctrl1" joint="joint1" ctrllimited="true" ctrlrange="-100 100" />-->
+<!--        <motor name="trq_ctrl2" joint="joint2" ctrllimited="true" ctrlrange="-100 100" />-->
+<!--    </actuator>-->
+
+<!--    <sensor>-->
+<!--        <jointpos name="pos_sensor1" joint="joint1" />-->
+<!--        <jointvel name="vel_sensor1" joint="joint1" />-->
+<!--        <jointpos name="pos_sensor2" joint="joint2" />-->
+<!--        <jointvel name="vel_sensor2" joint="joint2" />-->
+<!--    </sensor>-->
+
+</mujoco>

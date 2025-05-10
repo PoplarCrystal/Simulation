@@ -1,0 +1,120 @@
+<mujoco model="ur5">
+  <compiler angle="radian" meshdir="../meshes/"/>
+  <option timestep="0.001" tolerance="1e-10" solver="Newton" 
+          gravity="0 0 -9.81" integrator="RK4" iterations="50"/>
+
+  <asset>
+    <mesh name="base" file="base.stl"/>
+    <mesh name="shoulder" file="shoulder.stl"/>
+    <mesh name="upperarm" file="upperarm.stl"/>
+    <mesh name="forearm" file="forearm.stl"/>
+    <mesh name="wrist1" file="wrist1.stl"/>
+    <mesh name="wrist2" file="wrist2.stl"/>
+    <mesh name="wrist3" file="wrist3.stl"/>
+  </asset>
+
+  <default>
+    <default class="visual">
+      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.7 0.7 0.7 1"/>
+    </default>
+
+    <default class="collision">
+      <geom type="mesh" contype="1" conaffinity="1" group="0" rgba="0.7 0.7 0.7 1"/>
+      <default class="collision1">  
+        <geom density="0" mass="0"/>
+        <default class="collision2">
+          <geom contype="0" conaffinity="0"/> 
+        </default>
+      </default>
+    </default>
+
+    <default class="joint">
+      <joint damping="0.5" frictionloss="0.02" armature="0.01" pos="0 0 0" axis="0 1 0" range="-6.28319 6.28319"/>
+      <default class="big_joint">
+        <joint damping="1" frictionloss="0.05" armature="0.02"/>
+      </default>
+    </default>
+
+    <default class="motor">
+      <motor gear="1" ctrllimited="true" ctrlrange="-28 28"/>
+      <default class="big_motor">
+        <motor gear="1" ctrllimited="true" ctrlrange="-150 150"/>
+      </default>
+    </default>
+  </default>
+
+  <worldbody>
+    <body name="base" pos="0 0 0.5">
+      <geom type="mesh" mesh="base" class="visual"/>
+      <geom type="mesh" mesh="base" class="collision"/>
+      <body name="shoulder_link" pos="0 0 0.089159">
+        <inertial pos="0 0 0" mass="3.7" diaginertia="0.0102675 0.0102675 0.00666"/>
+        <joint name="shoulder_pan_joint" axis="0 0 1" class="joint"/>
+        <geom type="mesh" mesh="shoulder" class="visual"/>
+        <!-- <geom type="mesh" mesh="shoulder" class="collision"/> -->
+        <body name="upper_arm_link" pos="0 0.13585 0" quat="0.707107 0 0.707107 0">
+          <inertial pos="0 0 0.28" mass="8.393" diaginertia="0.226891 0.226891 0.0151074"/>
+          <joint name="shoulder_lift_joint" range="-3.24 0.1" class="joint"/>
+          <geom type="mesh" mesh="upperarm" class="visual"/>
+          <geom type="mesh" mesh="upperarm" class="collision"/>
+          <body name="forearm_link" pos="0 -0.1197 0.425">
+            <inertial pos="0 0 0.25" mass="2.275" diaginertia="0.0494433 0.0494433 0.004095"/>
+            <joint name="elbow_joint"class="joint"/>
+            <geom type="mesh" mesh="forearm" class="visual"/>
+            <geom type="mesh" mesh="forearm" class="collision"/>
+            <body name="wrist_1_link" pos="0 0 0.39225" quat="0.707107 0 0.707107 0">
+              <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="1.219" diaginertia="0.21942 0.111173 0.111173"/>
+              <joint name="wrist_1_joint" class="joint"/>
+              <geom type="mesh" mesh="wrist1" class="visual"/>
+              <geom type="mesh" mesh="wrist1" class="collision"/>
+              <body name="wrist_2_link" pos="0 0.093 0">
+                <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="1.219" diaginertia="0.21942 0.111173 0.111173"/>
+                <joint name="wrist_2_joint" axis="0 0 1" class="joint"/>
+                <geom type="mesh" mesh="wrist2" class="visual"/>
+                <geom type="mesh" mesh="wrist2" class="collision"/>
+                <body name="wrist_3_link" pos="0 0 0.09465">
+                  <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.1879" diaginertia="0.033822 0.0171365 0.0171365"/>
+                  <joint name="wrist_3_joint" class="joint"/>
+                  <geom type="mesh" mesh="wrist3" class="visual"/>
+                  <geom type="mesh" mesh="wrist3" class="collision"/>
+                  <!-- <geom type="box" pos="0 0.075 0" size="0.04 0.025 0.04" rgba="0 1 0 0"/> -->
+                  <site name="ee" pos="0 0 0"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>  
+  </worldbody>
+
+  <contact>
+    <exclude name="base2upper_arm_link" body1="base" body2="upper_arm_link"/>
+    <exclude name="upper_arm_link2forearm_link" body1="upper_arm_link" body2="forearm_link"/>
+    <exclude name="forearm_link2wrist_1_link" body1="forearm_link" body2="wrist_1_link"/>
+    <exclude name="forearm_link2wrist_2_link" body1="forearm_link" body2="wrist_2_link"/>
+    <exclude name="wrist_1_link2wrist_2_link" body1="wrist_1_link" body2="wrist_2_link"/>
+    <exclude name="wrist_1_link2wrist_3_link" body1="wrist_1_link" body2="wrist_3_link"/>
+    <exclude name="wrist_2_link2wrist_3_link" body1="wrist_2_link" body2="wrist_3_link"/>
+  </contact>
+
+  <actuator>
+    <motor name="shoulder_pan_joint"  joint="shoulder_pan_joint" class="big_motor"/>
+    <motor name="shoulder_lift_joint"  joint="shoulder_lift_joint"  class="big_motor"/>
+    <motor name="elbow_joint"  joint="elbow_joint"  class="big_motor"/>
+    <motor name="wrist_1_joint"  joint="wrist_1_joint"  class="motor"/>
+    <motor name="wrist_2_joint"  joint="wrist_2_joint" class="motor"/>
+    <motor name="wrist_3_joint"  joint="wrist_3_joint" class="motor"/>
+  </actuator>
+
+  <sensor>
+    <framepos name="ee_pos" objtype="site" objname="ee"/>
+    <framequat name="ee_quat" objtype="site" objname="ee"/>
+    <force name="force_sensor" site="ee"/>
+    <torque name="torque_sensor" site="ee"/>
+  </sensor>
+
+  <keyframe>
+    <key name="home" qpos="-1.5708 -1.5708 1.5708 -1.5708 -1.5708 0"/>
+  </keyframe>
+</mujoco>
