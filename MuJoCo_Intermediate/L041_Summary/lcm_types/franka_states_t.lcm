@@ -1,0 +1,12 @@
+package franka;
+
+struct franka_states_t
+{
+    int64_t  timestamp;
+    double joint_cmd[7];
+    double joint_state[7];
+    double ee_pos_cmd[3];
+    double ee_quat_cmd[4];
+    double ee_pos_state[3];   
+    double ee_quat_state[4];
+}
