@@ -102,7 +102,7 @@ class DBPendulumControl:
         Xd = np.array([cart_pos[0], cart_pos[1]])
         X = np.array([self.data.sensordata[0], self.data.sensordata[2]])
         dX = np.array([self.data.sensordata[3], self.data.sensordata[5]])
-        dq = np.array([q1, q2])
+        dq = np.array([dq1, dq2])
         tau = JT @ (Kd @ (Xd - X) - Bd @ dX - Md @ dJ @ dq) + Fbias
         # tau = Fbias
         return tau
